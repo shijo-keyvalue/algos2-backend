@@ -1,4 +1,5 @@
-import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn, OneToMany } from 'typeorm';
+import { Post } from './Post';
 
 @Entity('user')
 export class User {
@@ -25,6 +26,9 @@ export class User {
 
   @Column({ type: 'uuid', nullable: true, name: 'subscription_plan_id' })
   public subscriptionPlanId: string;
+
+  @OneToMany(() => Post, (post) => post.user)
+  public posts: Post[];
 
   @Column({ type: 'varchar', length: 255, nullable: false, default: 'consumer' })
   public type: string;

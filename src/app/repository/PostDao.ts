@@ -5,6 +5,7 @@ import PaginationSupportedResponse from "../util/rest/paginationSupportedRespons
 import { PostDto } from "../dto/PostDto"; 
 import { Post } from "../entity/Post"; 
 import { isNonEmptyArray } from "../util/commonUtil";
+import { User } from "../entity/User";
 
 export class PostDao {
     public createPost = async (postDto: PostDto): Promise<Post> => {
@@ -36,6 +37,7 @@ export class PostDao {
         "comment",
         "comment.parent_id = post.id"
       )
+      .leftJoinAndSelect("post.user", "user")
       .where("post.id = :postId", { postId })
 
       // console.log(query.getQueryAndParameters())
@@ -47,15 +49,16 @@ export class PostDao {
   public getAllPosts = async (
     userId: string
   ): Promise<PaginationSupportedResponse> => {
-    let query = userId ? getManager()
-      .createQueryBuilder(Post,"post")
+    let query = getManager()
+    .createQueryBuilder(Post,"post")
     .leftJoinAndMapMany("post.comments", Post, "comment", "comment.parent_id = post.id")
-    .where("post.user_id = :userId", { userId })
-    .andWhere("post.is_post = true"):
-    getManager()
-      .createQueryBuilder(Post,"post")
-    .leftJoinAndMapMany("post.comments", Post, "comment", "comment.parent_id = post.id")
+    .leftJoinAndSelect("post.user", "user")
     .where("post.is_post = true");
+
+    if (userId) {
+      query.andWhere('post.user_id = :userId', { userId });
+    }
+  
     // console.log(query.getQueryAndParameters())
     const [records, total] = await query.getManyAndCount();
 

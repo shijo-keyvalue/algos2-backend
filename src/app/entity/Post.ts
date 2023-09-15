@@ -5,8 +5,10 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     DeleteDateColumn,
-    OneToMany
+    OneToMany,
+    ManyToOne
   } from 'typeorm';
+import { User } from './User';
   
   @Entity('post')
   export class Post {
@@ -27,6 +29,9 @@ import {
 
     @Column('uuid')
     public userId: string;
+
+    @ManyToOne(() => User, (user) => user.posts)
+    public user: User;
 
     // @OneToMany(() => Post, (comment) => comment.parentId) // Define the 'comments' relation
     // public comments: Post[]; // This is an array of nested comments
