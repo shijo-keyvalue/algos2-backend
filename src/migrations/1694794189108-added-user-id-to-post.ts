@@ -10,5 +10,4 @@ export class addedUserIdToPost1694794189108 implements MigrationInterface {
     public async down(queryRunner: QueryRunner): Promise<void> {
         await queryRunner.query(`ALTER TABLE "post" DROP COLUMN "user_id"`);
     }
-
 }

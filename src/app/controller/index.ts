@@ -8,10 +8,8 @@ import { UserDao } from "../repository/UserDao";
 import PostController from "./PostController";
 import { PostService } from "../service/PostService";
 import { PostDao } from "../repository/PostDao";
-import { ProductDao } from "../repository/ProductDao";
 import ProductController from "./ProductController";
 import { ProductService } from "../service/ProductService";
-<<<<<<< Updated upstream
 import { ProductDao } from "../repository/ProductDao";
 import GardenSiteController from "./GardenSiteController";
 import { GardenSiteService } from "../service/GardenSiteService";
@@ -23,9 +21,7 @@ import { CartService } from "../service/CartService";
 import { CartItemDao } from "../repository/CartItemDao";
 import { CartDao } from "../repository/CartDao";
 import CartController from "./CartController";
-=======
 import { PostLikeDao } from "../repository/PostLikeDao";
->>>>>>> Stashed changes
 
 const userDao = new UserDao();
 const userService = new UserService(userDao);
@@ -44,14 +40,11 @@ const cartService = new CartService(cartDao, cartItemDao);
 
 export default [
   new UserController(userService),
-<<<<<<< Updated upstream
   new ProductController(productService),
   new GardenSiteController(gardenSiteService),
   new PlantController(plantService),
-  new CartController(cartService)
-=======
+  new CartController(cartService),
   new PostController(postService),
   new ProductController(productService)
 
->>>>>>> Stashed changes
 ];
