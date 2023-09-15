@@ -15,3 +15,6 @@ npm run migrate
 
 npm run dev
 
+# Example endpoint
+
+GET :: http://localhost:3000/api/users
