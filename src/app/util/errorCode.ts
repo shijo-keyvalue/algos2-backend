@@ -2,6 +2,10 @@
  * Custom error codes to be send to UI to display proper a response
  */
 export const ErrorCodes: { [key: string]: CustomError } = {
+    GARDEN_SITE_NOT_FOUND: {
+        CODE: "GARDEN_SITE_NOT_FOUND",
+        MESSAGE: "Garden site not found",
+    },
     UNAUTHORIZED: {
         CODE: "UNAUTHORIZED",
         MESSAGE: "User is not allowed to perform this operation",

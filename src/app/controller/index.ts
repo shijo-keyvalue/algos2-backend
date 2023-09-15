@@ -8,13 +8,27 @@ import { UserDao } from "../repository/UserDao";
 import ProductController from "./ProductController";
 import { ProductService } from "../service/ProductService";
 import { ProductDao } from "../repository/ProductDao";
+import GardenSiteController from "./GardenSiteController";
+import { GardenSiteService } from "../service/GardenSiteService";
+import { GardenSiteDao } from "../repository/GardenSiteDao";
+import { PlantService } from "../service/PlantService";
+import { PlantDao } from "../repository/PlantDao";
+import PlantController from "./PlantController";
+
+
 
 const userDao = new UserDao();
 const userService = new UserService(userDao);
 const productDao = new ProductDao();
 const productService = new ProductService(productDao);
+const gardenSiteDao = new GardenSiteDao();
+const gardenSiteService = new GardenSiteService(gardenSiteDao);
+const plantDao = new PlantDao();
+const plantService = new PlantService(plantDao);
 
 export default [
   new UserController(userService),
-  new ProductController(productService)
+  new ProductController(productService),
+  new GardenSiteController(gardenSiteService),
+  new PlantController(plantService)
 ];
