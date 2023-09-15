@@ -20,9 +20,6 @@ import {
     @Column({ default: 'default' }) //change
     public type: string;
   
-    // @Column({ default: () => 'CURRENT_TIMESTAMP' })
-    // public creationDate: Date;
-  
     @Column({nullable: true})
     public status: string;
   

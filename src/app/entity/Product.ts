@@ -31,7 +31,6 @@ import {
     public categoryId: string;
   
     @ManyToOne(() => Category, (category) => category.products)
-    @JoinColumn({ name: 'categoryId' })
     public category: Category;
   
     @Column('varchar', { default: 'marketplace-product' })

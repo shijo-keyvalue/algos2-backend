@@ -30,6 +30,10 @@ export const ErrorCodes: { [key: string]: CustomError } = {
         CODE: "RIDER_NOT_FOUND",
         MESSAGE: "Ride not found",
     },
+    PRODUCT_NOT_FOUND: {
+        CODE: "PRODUCT_NOT_FOUND",
+        MESSAGE: "Product not found",
+    },
 };
 
 /**
