@@ -1,15 +1,17 @@
-import {Column, CreateDateColumn, DeleteDateColumn, Entity, JoinTable, ManyToMany, OneToMany, PrimaryGeneratedColumn, UpdateDateColumn} from "typeorm";
+import { Entity, PrimaryGeneratedColumn, Column, CreateDateColumn, UpdateDateColumn, DeleteDateColumn } from 'typeorm';
 
-@Entity()
+@Entity('user')
 export class User {
-
-  @PrimaryGeneratedColumn("uuid")
+  @PrimaryGeneratedColumn('uuid')
   public id: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', length: 255, nullable: true})
+  public email: string;
+
+  @Column({ type: 'varchar', length: 255, nullable: false })
   public name: string;
 
-  @Column({ nullable: true })
+  @Column({ type: 'varchar', nullable: true })
   public avatar: string;
 
   @Column({ unique: true })
@@ -18,27 +20,21 @@ export class User {
   @Column({ nullable: true })
   public password?: string;
 
-  @Column({ nullable: true , default: "verification-pending" })
-  public status?: string;
+  @Column({ type: 'varchar', length: 255, nullable: false, default: 'verification-pending' })
+  public status: string;
 
-  @CreateDateColumn({
-    name: "created_at",
-    type: "timestamp",
-  })
+  @Column({ type: 'uuid', nullable: true, name: 'subscription_plan_id' })
+  public subscriptionPlanId: string;
+
+  @Column({ type: 'varchar', length: 255, nullable: false, default: 'consumer' })
+  public type: string;
+
+  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'created_at' })
   public createdAt: Date;
 
-  @UpdateDateColumn({
-    name: "updated_at",
-    type: "timestamp",
-  })
+  @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP', name: 'updated_at' })
   public updatedAt: Date;
 
-  @DeleteDateColumn({
-    name: "deleted_at",
-    type: "timestamp",
-    nullable: true,
-    default: null,
-  })
-  public deletedAt?: Date = null;
-
+  @DeleteDateColumn({ type: 'timestamp', nullable: true, name: 'deleted_at',  default: null })
+  public deletedAt: Date = null;
 }

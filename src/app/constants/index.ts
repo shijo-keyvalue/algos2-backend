@@ -8,7 +8,7 @@ const APP_CONSTANTS = {
     basePath:`http://localhost:${process.env.PORT}`,
 
     // Add the short name of the service below
-    service: "cargo-logistics-app",
+    service: "algos2.0-backend-app",
     otp: 1360
 };
 
