@@ -41,6 +41,10 @@ class UserController extends AbstractController {
       `${this.path}/:id/verify-otp`,
       this.asyncRouteHandler(this.verifyOtp)
     );
+    this.router.get(
+      `${this.path}/gardencounts/:id`,
+      this.asyncRouteHandler(this.getUserGardenCounts)
+    )
   }
 
   private registerUser = async (
@@ -131,6 +135,22 @@ class UserController extends AbstractController {
     const loginDetail = await this.userService.verifyOtp(otp, userId);
     response.send(
       this.fmt.formatResponse(loginDetail, Date.now() - request.startTime, "OK")
+    );
+  }
+
+  private getUserGardenCounts = async (
+    request: RequestWithUser,
+    response: Response,
+    next: NextFunction
+  ) => {
+    const userId = request.params.id as string;
+    const counts = await this.userService.getUserGardenCounts(userId);
+    response.send(
+      this.fmt.formatResponse(
+        counts,
+        Date.now() - request.startTime,
+        "OK"
+      )
     );
   }
 }

@@ -92,4 +92,9 @@ export class UserService {
     return inputPassword === userPassword;
   }
 
+  public getUserGardenCounts = async (userId: string): Promise<{ gardenCount: number; plantCount: number }> => {
+    const counts = await this.userDao.getUserGardenCounts(userId);
+    return counts;
+  }
+
 }

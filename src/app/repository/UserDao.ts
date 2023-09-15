@@ -14,6 +14,7 @@ import { RegisterUserDto } from "../dto/RegisterUserDto";
 import { User } from "../entity/User";
 import { isNonEmptyArray } from "../util/commonUtil";
 import PaginationSupportedResponse from "../util/rest/paginationSupportedResponse";
+import { getConnection, QueryRunner } from 'typeorm';
 
 /**
  * Handles CRUD operations
@@ -48,6 +49,30 @@ export class UserDao {
     return true;
   }
 
+  public getUserGardenCounts = async (userId: string): Promise<{ gardenCount: number; plantCount: number }> => {
+    const query = `
+      SELECT
+        COUNT(DISTINCT gs.id) AS "gardenCount",
+        COUNT(DISTINCT p.id) AS "plantCount"
+      FROM
+        garden_site gs
+      LEFT JOIN
+        garden_site_plant p ON gs.id = p.garden_site_id
+      WHERE
+        gs.user_id = $1
+    `;
+    const connection = getConnection(); // Get the existing connection or create one
+    const queryRunner: QueryRunner = connection.createQueryRunner();
+    const result = await queryRunner.query(query, [userId]);
+    if (result.length > 0) {
+      const { gardenCount, plantCount } = result[0];
+      console.log({ gardenCount, plantCount })
+      return { gardenCount, plantCount };
+    } else {
+      return { gardenCount: 0, plantCount: 0 };
+    }
+  }
+
   public getAllUsers = async (searchParams: any): Promise<PaginationSupportedResponse> => {
     searchParams.limit = searchParams?.limit || 1000;
     searchParams.offset = searchParams?.offset || 0;
@@ -70,7 +95,6 @@ export class UserDao {
     // return Array.isArray(records) && records.length > 0 ? records : [];
     return {data : isNonEmptyArray(records) ? records : [], total }
   }
-
 //   public getById = async (vehicleId: string): Promise<Vehicle> => {
 //     const vehicleRepo: Repository<Vehicle> = getManager().getRepository(Vehicle);
 //     const vehicleData = await vehicleRepo.findOne(vehicleId);
