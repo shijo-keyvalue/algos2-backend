@@ -72,9 +72,5 @@
     "typescript": "^4.1.3"
   },
   "author": "Keyvalue",
-  "license": "ISC",
-  "bugs": {
-    "url": "https://bitbucket.org/keyvaluesoftwaresystems/surgeapp"
-  },
-  "homepage": "https://bitbucket.org/keyvaluesoftwaresystems/surgeapp"
+  "license": "ISC"
 }
