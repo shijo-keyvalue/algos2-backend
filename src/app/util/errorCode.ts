@@ -38,6 +38,18 @@ export const ErrorCodes: { [key: string]: CustomError } = {
         CODE: "PRODUCT_NOT_FOUND",
         MESSAGE: "Product not found",
     },
+    POST_NOT_FOUND: {
+        CODE: "POST_NOT_FOUND",
+        MESSAGE: "Post not found",
+    },
+    POST_ALREADY_LIKED: {
+        CODE: "POST ALREADY LIKED",
+        MESSAGE: "Post already liked"
+    },
+    POST_NOT_LIKED: {
+        CODE: "POST NOT LIKED",
+        MESSAGE: "Post not liked"
+    }
 };
 
 /**
