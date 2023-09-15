@@ -5,7 +5,10 @@ import {
     CreateDateColumn,
     UpdateDateColumn,
     DeleteDateColumn,
+    ManyToOne,
+    JoinColumn,
   } from 'typeorm';
+import { User } from './User';
   
   @Entity('shop')
   class Shop {
@@ -29,6 +32,10 @@ import {
   
     @Column('uuid', { nullable: true })
     public userId: string | null;
+
+    @ManyToOne(() => User, (user) => user.id)
+    @JoinColumn({ name: 'userId' })
+    public user: User | null;
   
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
     public createdAt: Date;
@@ -38,6 +45,6 @@ import {
   
     @DeleteDateColumn({ type: 'timestamp', nullable: true})
     public deletedAt: Date | null;
-}
+  }
 
   

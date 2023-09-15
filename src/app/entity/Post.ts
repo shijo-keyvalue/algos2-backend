@@ -7,30 +7,33 @@ import {
     DeleteDateColumn,
   } from 'typeorm';
   
-  @Entity('subscription_plan')
-  export class SubscriptionPlan {
+  @Entity('post')
+  export class Post {
     @PrimaryGeneratedColumn('uuid')
     public id: string;
   
-    @Column('varchar', { nullable: true })
-    public name: string;
+    @Column('varchar', { length: 255 })
+    public content: string;
   
-    @Column('varchar', { nullable: true })
-    public description: string;
+    @Column('jsonb', { nullable: true })
+    public images: any[] | null;
   
-    @Column('varchar', { nullable: true })
-    public image: string | null;
+    @Column('boolean', { default: false })
+    public isPost: boolean;
+  
+    @Column('uuid')
+    public parentId: string;
   
     @Column('int', { nullable: true })
-    public price: number | null;
+    public likeCount: number | null;
   
     @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    public created_at: Date;
+    public createdAt: Date;
   
     @UpdateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-    public updated_at: Date;
+    public updatedAt: Date;
   
     @DeleteDateColumn({ type: 'timestamp', nullable: true})
     public deletedAt: Date | null;
   }
-    
+  

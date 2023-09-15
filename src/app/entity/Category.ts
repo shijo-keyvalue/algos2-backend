@@ -31,5 +31,4 @@ import {
   
     @DeleteDateColumn({ type: 'timestamp', nullable: true})
     public deletedAt: Date | null;
-}
-    
+  }
