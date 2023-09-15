@@ -7,8 +7,10 @@ import {
     DeleteDateColumn,
     ManyToOne,
     JoinColumn,
+    OneToMany,
   } from 'typeorm';
   import { Category } from './Category';
+import { CartItem } from './CartItem';
   
   @Entity('product')
   export class Product {
@@ -32,6 +34,9 @@ import {
   
     @ManyToOne(() => Category, (category) => category.products)
     public category: Category;
+
+    @OneToMany(() => CartItem, (cartItem) => cartItem.product)
+    public cartItems: CartItem[];
   
     @Column('varchar', { default: 'marketplace-product' })
     public type: string;

@@ -8,6 +8,7 @@ import {
     ManyToOne,
     OneToMany,
   } from 'typeorm';
+import { CartItem } from './CartItem';
   
   @Entity('cart')
   export class Cart {
@@ -22,6 +23,9 @@ import {
   
     @Column({nullable: true})
     public status: string;
+
+    @OneToMany(() => CartItem, (cartItem) => cartItem.cart)
+    public cartItems: CartItem[];
   
     @CreateDateColumn({ name: 'created_at', default: () => 'CURRENT_TIMESTAMP' })
     public createdAt: Date;
@@ -32,5 +36,4 @@ import {
     @DeleteDateColumn({ name: 'deleted_at', default: () => 'CURRENT_TIMESTAMP' })
     public deletedAt: Date;
   
-    // Add your relationships here if needed
   }

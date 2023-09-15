@@ -6,7 +6,10 @@ import {
   UpdateDateColumn,
   DeleteDateColumn,
   ManyToOne,
+  OneToOne,
 } from 'typeorm';
+import { Cart } from './Cart';
+import { Product } from './Product';
 
 @Entity('cart_item')
 export class CartItem {
@@ -18,6 +21,12 @@ export class CartItem {
 
   @Column('uuid', { name: 'product_id' })
   public productId: string;
+
+  @ManyToOne(() => Product, (product) => product.cartItems)
+  public product: Product;
+
+  @ManyToOne(() => Cart, (cart) => cart.cartItems)
+  public cart: Cart;
 
   @Column()
   public quantity: number;
