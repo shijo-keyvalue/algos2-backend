@@ -31,6 +31,11 @@ class CartController extends AbstractController {
       `${this.path}`,
       this.asyncRouteHandler(this.addToCart)
     );
+
+    this.router.delete(
+        `${this.path}/:userId`,
+        this.asyncRouteHandler(this.clearCart)
+    );
   }
 
   public getCartByUser = async (
@@ -59,6 +64,22 @@ class CartController extends AbstractController {
       response.send(
         this.fmt.formatResponse(
             "Item Added to Cart",
+            Date.now() - request.startTime,
+            "OK"
+        )
+    );
+  };
+
+  public clearCart = async (
+    request: RequestWithUser,
+    response: Response,
+    next: NextFunction
+    ) => {
+    const userId = request.params.userId;
+    await this.cartService.clearCart(userId);
+    response.send(
+        this.fmt.formatResponse(
+            "Cart cleared successfully",
             Date.now() - request.startTime,
             "OK"
         )

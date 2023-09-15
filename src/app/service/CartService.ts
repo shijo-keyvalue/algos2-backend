@@ -25,4 +25,8 @@ export class CartService {
     // Add the product to the cart
     await this.cartItemDao.addToCart(cart.id, productId, quantity);
   }
+
+  public clearCart = async (userId: string) => {
+    await this.cartItemDao.deleteCartItemsByUserId(userId);
+  };
 }

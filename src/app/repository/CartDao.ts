@@ -1,5 +1,6 @@
 import { getRepository, Repository } from 'typeorm';
 import { Cart } from '../entity/Cart';
+import { CartItem } from '../entity/CartItem';
 
 export class CartDao {
   public async getCartByUser(userId: string): Promise<Cart | undefined> {
