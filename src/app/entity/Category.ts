@@ -19,6 +19,9 @@ import {
   
     @Column('varchar', { nullable: true })
     public description: string;
+
+    @Column('varchar', { nullable: true })
+    public image: string;
   
     @OneToMany(() => Product, (product) => product.category)
     public products: Product[];
