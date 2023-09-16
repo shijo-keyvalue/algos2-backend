@@ -33,7 +33,7 @@ import { CartItem } from './CartItem';
     @UpdateDateColumn({ name: 'updated_at', default: () => 'CURRENT_TIMESTAMP' })
     public updatedAt: Date;
   
-    @DeleteDateColumn({ name: 'deleted_at', default: () => 'CURRENT_TIMESTAMP' })
+    @DeleteDateColumn({ name: 'deleted_at', nullable: true })
     public deletedAt: Date;
   
   }
