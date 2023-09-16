@@ -4,6 +4,8 @@ export class addProductCategoryData1694769204929 implements MigrationInterface {
     name = 'addProductCategoryData1694769204929'
 
     public async up(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE "category" ADD "image" character varying`);
+
         await queryRunner.query(`INSERT INTO public.category
         (id, "name", description, created_at, updated_at, deleted_at, image)
         VALUES('35f503d0-4311-4d12-8c61-82a0f20568e5'::uuid, 'Kits', 'Description 1', '2023-09-15 12:22:14.021', '2023-09-15 12:22:14.021', NULL, 'https://drive.google.com/uc?export=view&id=18Uj33_adLxh6u_zfa00Pm5JlShfB917m');`)
@@ -224,6 +226,7 @@ export class addProductCategoryData1694769204929 implements MigrationInterface {
     }
 
     public async down(queryRunner: QueryRunner): Promise<void> {
+        await queryRunner.query(`ALTER TABLE "category" DROP COLUMN "image"`);
     }
 
 }
