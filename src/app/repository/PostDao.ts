@@ -37,6 +37,7 @@ export class PostDao {
         "comment",
         "comment.parent_id = post.id"
       )
+      .leftJoinAndMapMany("comment.user", User, "comment_user", "comment_user.id = comment.user_id")
       .leftJoinAndSelect("post.user", "user")
       .where("post.id = :postId", { postId })
 
@@ -52,6 +53,7 @@ export class PostDao {
     let query = getManager()
     .createQueryBuilder(Post,"post")
     .leftJoinAndMapMany("post.comments", Post, "comment", "comment.parent_id = post.id")
+    .leftJoinAndMapMany("comment.user", User, "comment_user", "comment_user.id = comment.user_id")
     .leftJoinAndSelect("post.user", "user")
     .where("post.is_post = true");
 
